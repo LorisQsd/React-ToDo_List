@@ -11,10 +11,9 @@ function App() {
     { id: nanoid(8), content: "item 3"},
   ])
 
-  console.log(todoList)
 
-  function deleteTodo() {
-    console.log("coucou")
+  function deleteTodo(id) {
+    setTodoList(todoList.filter(todo => todo.id !== id))
   }
 
   return (
@@ -30,6 +29,9 @@ function App() {
         </form>
 
         <ul>
+          {!todoList.length && (
+            <li className="text-slate-50 text-md">Pas d'items à afficher...</li>
+          )}
           {todoList.map(item => (
             <ListItem key={item.id} itemData={item} deleteTodo={deleteTodo}/>
           ))}
